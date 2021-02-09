@@ -11,10 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mynewsrecyclerview.R
 import com.example.mynewsrecyclerview.databinding.ActivityMainBinding
-import com.example.mynewsrecyclerview.ui.fragments.MostPopularFragment
-import com.example.mynewsrecyclerview.ui.fragments.MovieReviewsFragment
-import com.example.mynewsrecyclerview.ui.fragments.SearchedArticlesFragment
-import com.example.mynewsrecyclerview.ui.fragments.TopStoriesFragment
+import com.example.mynewsrecyclerview.ui.fragments.*
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -30,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         val fragments: ArrayList<Fragment> = arrayListOf(TopStoriesFragment(), MostPopularFragment(), MovieReviewsFragment())
         val viewPager: ViewPager2 = binding.viewPager
         val adapter = ViewPagerAdapter(fragments, this)
-        val searchButton = findViewById<View>(R.id.search)
-
 
         binding.topAppBar.setNavigationOnClickListener {
             // Handle navigation icon press
@@ -45,12 +40,17 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frameLayout, SearchedArticlesFragment())
                         .setReorderingAllowed(true)
-                        .addToBackStack("name") // name can be null
+                        .addToBackStack("Search") // name can be null
                         .commit()
                     true
                 }
                 R.id.more -> {
                     // Handle more item (inside overflow menu) press
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, NotificationsFragment())
+                        .setReorderingAllowed(true)
+                        .addToBackStack("Notifications") // name can be null
+                        .commit()
                     true
                 }
                 else -> false
@@ -62,16 +62,16 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.text = ""
-                    tab.setIcon(R.drawable.ic_top_stories)
+                    tab.text = "Top stories"
+                    // tab.setIcon(R.drawable.ic_top_stories)
                 }
                 1 -> {
-                    tab.text = ""
-                    tab.setIcon(R.drawable.ic_baseline_star_24)
+                    tab.text = "Most popular"
+                    // tab.setIcon(R.drawable.ic_baseline_star_24)
                 }
                 2 -> {
-                    tab.text = ""
-                    tab.setIcon(R.drawable.ic_film_reviews)
+                    tab.text = "Movie reviews"
+                    // tab.setIcon(R.drawable.ic_film_reviews)
                 }
             }
         }.attach()
