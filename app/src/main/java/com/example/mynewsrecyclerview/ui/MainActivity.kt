@@ -1,6 +1,7 @@
 package com.example.mynewsrecyclerview.ui
 
 import android.content.ClipData
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -11,6 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mynewsrecyclerview.R
 import com.example.mynewsrecyclerview.databinding.ActivityMainBinding
+import com.example.mynewsrecyclerview.ui.activities.NotificationsActivity
+import com.example.mynewsrecyclerview.ui.activities.SearchActivity
 import com.example.mynewsrecyclerview.ui.fragments.*
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -24,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         val fragments: ArrayList<Fragment> = arrayListOf(TopStoriesFragment(), MostPopularFragment(), MovieReviewsFragment())
         val viewPager: ViewPager2 = binding.viewPager
         val adapter = ViewPagerAdapter(fragments, this)
@@ -32,30 +37,26 @@ class MainActivity : AppCompatActivity() {
             // Handle navigation icon press
         }
 
+
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.search -> {
                     // Handle search icon press
-
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameLayout, SearchedArticlesFragment())
-                        .setReorderingAllowed(true)
-                        .addToBackStack("Search") // name can be null
-                        .commit()
+                    val searchActivityIntent = Intent(baseContext, SearchActivity::class.java)
+                    startActivity(searchActivityIntent)
                     true
                 }
                 R.id.more -> {
                     // Handle more item (inside overflow menu) press
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameLayout, NotificationsFragment())
-                        .setReorderingAllowed(true)
-                        .addToBackStack("Notifications") // name can be null
-                        .commit()
+                    val notificationsActivityIntent = Intent(baseContext, NotificationsActivity::class.java)
+                    startActivity(notificationsActivityIntent)
                     true
                 }
                 else -> false
             }
         }
+
+
 
         viewPager.adapter = adapter
 

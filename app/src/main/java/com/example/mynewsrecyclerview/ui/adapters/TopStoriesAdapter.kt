@@ -1,5 +1,6 @@
 package com.example.mynewsrecyclerview.ui.adapters
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -33,7 +34,8 @@ class TopStoriesAdapter : RecyclerView.Adapter<TopStoriesAdapter.ArticleViewHold
     override fun getItemCount() = articles.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        return ArticleViewHolder(ArticleRowBinding.inflate(
+        return ArticleViewHolder(
+            ArticleRowBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -44,7 +46,7 @@ class TopStoriesAdapter : RecyclerView.Adapter<TopStoriesAdapter.ArticleViewHold
         val article = articles[position]
 
         holder.binding.apply {
-            Glide.with(root.rootView.context).load(article.multimedia[2].url).into(ivThumbnail)
+            Glide.with(ivThumbnail.context).load(article.multimedia[2].url).into(ivThumbnail)
             tvTitle.text = article.title
             tvRegion.text = article.section
             tvDate.text = article.published_date

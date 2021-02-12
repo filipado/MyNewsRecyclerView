@@ -45,16 +45,14 @@ class MostPopularAdapter : RecyclerView.Adapter<MostPopularAdapter.MostPopularVi
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
-        )
+            ))
     }
 
     override fun onBindViewHolder(holder: MostPopularViewHolder, position: Int) {
         val mostPopularArticle = mostPopularArticles[position]
 
         holder.binding.apply {
-            Glide.with(ivThumbnail.context)
-                .load(mostPopularArticle.media[0].mostPopularMetaData[1].url).into(ivThumbnail)
+            Glide.with(ivThumbnail.context).load(mostPopularArticle.media[0].mostPopularMetaData[1].url).into(ivThumbnail)
             tvTitle.text = mostPopularArticle.title
             tvRegion.text = mostPopularArticle.section
             tvDate.text = mostPopularArticle.published_date
