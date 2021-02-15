@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mynewsrecyclerview.databinding.ArticleRowBinding
 import com.example.mynewsrecyclerview.api.response.TopStory
+import com.example.mynewsrecyclerview.ui.fragments.TopStoriesFragment
 
 class TopStoriesAdapter : RecyclerView.Adapter<TopStoriesAdapter.ArticleViewHolder>() {
 
@@ -46,7 +47,7 @@ class TopStoriesAdapter : RecyclerView.Adapter<TopStoriesAdapter.ArticleViewHold
         val article = articles[position]
 
         holder.binding.apply {
-            Glide.with(ivThumbnail.context).load(article.multimedia[2].url).into(ivThumbnail)
+            Glide.with(cardView.context).load(article.multimedia[2].url).into(ivThumbnail)
             tvTitle.text = article.title
             tvRegion.text = article.section
             tvDate.text = article.published_date

@@ -1,13 +1,21 @@
 package com.example.mynewsrecyclerview.ui.activities
 
+import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.mynewsrecyclerview.databinding.ActivitySearchBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
+
+    private var startDateConvertedString: String? = null
+    private var endDateConvertedString: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +24,21 @@ class SearchActivity : AppCompatActivity() {
 
         artsClick(); businessClick();entrepreneursClick(); politicsClick(); sportsClick(); travelClick()
 
+        // Set up START DATE with Date Dialog
+        binding.datePickerStart.setOnClickListener{
+            showDatePickerDialog{
+                updateStartDate(it)
+            }
+        }
+
+        // Set up END date with date dialog
+        binding.datePickerEnd.setOnClickListener{
+            showDatePickerDialog{
+                updateEndDate(it)
+            }
+        }
+
+        // Search Button INTENT click takes us to show Search results
         binding.button.setOnClickListener{
             val searchArticlesResultActivity = Intent(baseContext, SearchedArticlesResultsActivity::class.java)
             startActivity(searchArticlesResultActivity)
@@ -23,6 +46,49 @@ class SearchActivity : AppCompatActivity() {
 
 
     }
+
+    private fun showDatePickerDialog(onDateSetAction: (Calendar) -> Unit) {
+        val calendar = Calendar.getInstance()
+
+        val listener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            calendar.apply {
+                set(Calendar.YEAR, year)
+                set(Calendar.MONTH, monthOfYear)
+                set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            }
+            onDateSetAction(calendar)
+        }
+
+        DatePickerDialog(
+            this, listener, calendar
+                .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        ).show()
+    }
+
+
+    private fun updateStartDate(calendar: Calendar) {
+        val myFormat = "MM-dd-yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.UK)
+
+        binding.datePickerStart.setText(sdf.format(calendar.time))
+        startDateConvertedString = SimpleDateFormat("yyyyMMdd", Locale.UK).format(calendar.time)
+
+    }
+
+    private fun updateEndDate(calendar: Calendar) {
+        val myFormat = "MM-dd-yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.UK)
+
+        binding.datePickerEnd.setText(sdf.format(calendar.time))
+        endDateConvertedString = SimpleDateFormat("yyyyMMdd", Locale.UK).format(calendar.time)
+
+    }
+
+
+
+
 
     private fun artsClick() {
         val artsText = binding.artsCB.text.toString()

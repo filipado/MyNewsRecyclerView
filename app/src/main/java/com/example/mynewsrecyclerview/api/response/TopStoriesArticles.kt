@@ -1,8 +1,7 @@
 package com.example.mynewsrecyclerview.api.response
 
-data class TopStoryResponse(
-    val results : List<TopStory>
-)
+data class TopStoryResponse(val results : List<TopStory>)
+
 
 data class TopStory(
     val published_date: String,
@@ -19,6 +18,3 @@ data class Multimedia (
     // Movie Reviews Response:
     val src: String
 )
-
-
-

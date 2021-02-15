@@ -18,7 +18,7 @@ interface ArticlesApi {
     suspend fun getTopStories(): Response<TopStoryResponse>
 
     //getting MOST POPULAR response from API
-    @GET("mostpopular/v2/viewed/1.json?api-key=$apiKey")
+    @GET("mostpopular/v2/viewed/30.json?api-key=$apiKey")
     suspend fun getMostPopular(): Response<MostViewedResponse>
 
     //getting MOVIE REVIEWS response from API
@@ -26,7 +26,7 @@ interface ArticlesApi {
     suspend fun getMovieReviews(): Response<MovieReviewsResponse>
 
     //getting SEARCHED ARTICLES response from API
-    @GET("")
+    @GET("search/v2/articlesearch.json")
     suspend fun getSearchedArticles(
             @Query("q") query: String?,
             @Query("begin_date") beginDate: String?,

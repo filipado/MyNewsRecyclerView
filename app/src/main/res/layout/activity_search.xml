@@ -44,7 +44,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/datePickerEnd"
+        android:id="@+id/datePickerEndLayout"
 
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -56,6 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/searchQueryTextFieldLayout">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/datePickerEnd"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="date" />
@@ -108,7 +109,7 @@
         android:layout_marginTop="24dp"
         android:text="Politics"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/datePickerEnd" />
+        app:layout_constraintTop_toBottomOf="@+id/datePickerEndLayout" />
 
     <CheckBox
         android:id="@+id/sportsCB"

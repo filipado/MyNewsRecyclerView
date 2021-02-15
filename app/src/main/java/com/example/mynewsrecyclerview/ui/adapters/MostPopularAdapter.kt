@@ -11,8 +11,6 @@ import com.example.mynewsrecyclerview.databinding.ArticleRowBinding
 
 class MostPopularAdapter : RecyclerView.Adapter<MostPopularAdapter.MostPopularViewHolder>() {
 
-    inner class MostPopularViewHolder(val binding: ArticleRowBinding) :
-        RecyclerView.ViewHolder(binding.root)
 
     private val diffCallBack = object : DiffUtil.ItemCallback<MostPopularArticle>() {
         override fun areItemsTheSame(
@@ -33,11 +31,10 @@ class MostPopularAdapter : RecyclerView.Adapter<MostPopularAdapter.MostPopularVi
     private val differ = AsyncListDiffer(this, diffCallBack)
     var mostPopularArticles: List<MostPopularArticle>
         get() = differ.currentList
-        set(value)  {
+        set(value) {
             differ.submitList(value)
         }
 
-    override fun getItemCount() = mostPopularArticles.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MostPopularViewHolder {
         return MostPopularViewHolder(
@@ -45,18 +42,24 @@ class MostPopularAdapter : RecyclerView.Adapter<MostPopularAdapter.MostPopularVi
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            ))
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: MostPopularViewHolder, position: Int) {
         val mostPopularArticle = mostPopularArticles[position]
 
         holder.binding.apply {
-            Glide.with(ivThumbnail.context).load(mostPopularArticle.media[0].mostPopularMetaData[1].url).into(ivThumbnail)
+            Glide.with(cardView.context).load(mostPopularArticle.media[0].mostPopularMetaData[1].url).into(ivThumbnail)
             tvTitle.text = mostPopularArticle.title
             tvRegion.text = mostPopularArticle.section
             tvDate.text = mostPopularArticle.published_date
         }
     }
 
+    override fun getItemCount() = mostPopularArticles.size
+
+
+    inner class MostPopularViewHolder(val binding: ArticleRowBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

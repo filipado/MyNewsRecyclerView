@@ -47,7 +47,7 @@ class MovieReviewsAdapter : RecyclerView.Adapter<MovieReviewsAdapter.MovieReview
         val movieReview = movieReviews[position]
 
         holderMovie.binding.apply {
-            Glide.with(ivThumbnail.context).load(movieReview.multimedia.src).into(ivThumbnail)
+            Glide.with(cardView.context).load(movieReview.multimedia.src).into(ivThumbnail)
             tvTitle.text = movieReview.summary_short
             tvRegion.text = movieReview.byline
             tvDate.text = movieReview.opening_date

@@ -15,17 +15,15 @@ class NotificationsActivity : AppCompatActivity() {
         binding = ActivityNotificationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         artsClick()
-
         businessClick()
-
         entrepreneursClick()
-
         politicsClick()
-
         sportsClick()
-
         travelClick()
+
+
 
 
     }
