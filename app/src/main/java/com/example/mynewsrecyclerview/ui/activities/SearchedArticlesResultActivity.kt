@@ -24,6 +24,20 @@ class SearchedArticlesResultActivity : AppCompatActivity() {
         binding = ActivitySearchedArticlesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Importing values from Search Activity
+
+        val searchQuery = intent.getStringExtra("EXTRA_QUERY")
+        val startDate = intent.getStringExtra("EXTRA_DATE_START")
+        val endDate = intent.getStringExtra("EXTRA_DATE_END")
+
+        val arts = intent.getStringExtra("EXTRA_ARTS")
+        val business = intent.getStringExtra("BUSINESS")
+        val entrepreneurs = intent.getStringExtra("EXTRA_ENTREPRENEURS")
+        val politics = intent.getStringExtra("EXTRA_POLITICS")
+        val sports = intent.getStringExtra("EXTRA_SPORTS")
+        val travel = intent.getStringExtra("EXTRA_TRAVEL")
+
+
         setupRecyclerView()
 
         lifecycleScope.launchWhenCreated {
@@ -31,7 +45,7 @@ class SearchedArticlesResultActivity : AppCompatActivity() {
             binding.pbSearchResults.isVisible = true
 
             val response = try {
-                ApiClient.retrofit.getObamaArticles()
+                ApiClient.retrofit.getSearchedArticles(searchQuery, "20200202", "20210602", "Arts")
             } catch (e: IOException) {
                 Log.e(TopStoriesFragment.TAG, "IOException, you might not have internet connection")
                 binding.pbSearchResults.isVisible = false

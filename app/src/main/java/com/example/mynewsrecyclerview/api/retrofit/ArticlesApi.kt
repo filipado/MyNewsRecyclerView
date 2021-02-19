@@ -43,7 +43,7 @@ interface ArticlesApi {
         @Query("q") query: String? = "obama",
         @Query("begin_date") beginDate: String? = "20200202",
         @Query("end_date") endDate: String? = "20210602",
-       // @Query("fq") sections: String? = "news_desk:(Arts)",
+        @Query("fq") sections: String? = "",
         @Query("api-key") apiKey : String = API_KEY
     ): Response<SearchResponse>
 

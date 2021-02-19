@@ -20,7 +20,6 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        artsClick(); businessClick();entrepreneursClick(); politicsClick(); sportsClick(); travelClick()
 
         // Set up START DATE with Date Dialog
         binding.datePickerStart.setOnClickListener{
@@ -38,8 +37,39 @@ class SearchActivity : AppCompatActivity() {
 
         // Search Button INTENT click takes us to show Search results
         binding.button.setOnClickListener{
-            val searchArticlesResultActivity = Intent(baseContext, SearchedArticlesResultActivity::class.java)
-            startActivity(searchArticlesResultActivity)
+
+            // All values to be exported to search activity using Intent
+            val arts = if(binding.artsCB.isChecked) "arts" else ""
+            val business = if(binding.businessCB.isChecked) "business" else ""
+            val entrepreneurs = if(binding.entrepreneursCB.isChecked) "entrepreneurs" else ""
+            val politics = if(binding.politicsCB.isChecked) "politics" else ""
+            val sports = if(binding.sportsCB.isChecked) "sports" else ""
+            val travel = if(binding.travelCB.isChecked) "travel" else ""
+
+            val searchQuery = binding.textInputSearchQuery.text.toString()
+            val dateStart = binding.datePickerStart.text.toString()
+            val dateEnd = binding.datePickerEnd.text.toString()
+
+            Intent(baseContext, SearchedArticlesResultActivity::class.java).also{
+
+                // NEWS DESK VALUES
+                it.putExtra("EXTRA_ARTS", arts)
+                it.putExtra("BUSINESS", business)
+                it.putExtra("EXTRA_ENTREPRENEURS", entrepreneurs)
+                it.putExtra("EXTRA_POLITICS", politics)
+                it.putExtra("EXTRA_SPORTS", sports)
+                it.putExtra("EXTRA_TRAVEL", travel)
+
+                // Search query
+                it.putExtra("EXTRA_QUERY", searchQuery)
+
+                // Date values
+                it.putExtra("EXTRA_DATE_START", dateStart)
+                it.putExtra("EXTRA_DATE_END", dateEnd)
+
+                startActivity(it)
+
+            }
         }
 
 
@@ -82,81 +112,5 @@ class SearchActivity : AppCompatActivity() {
         binding.datePickerEnd.setText(sdf.format(calendar.time))
         endDateConvertedString = SimpleDateFormat("yyyyMMdd", Locale.UK).format(calendar.time)
 
-    }
-
-
-
-
-
-    private fun artsClick() {
-        val artsText = binding.artsCB.text.toString()
-
-        binding.artsCB.setOnClickListener {
-            if (binding.artsCB.isChecked) {
-                binding.textView3.text = artsText
-            } else {
-                binding.textView3.text = null
-            }
-        }
-    }
-
-    private fun businessClick() {
-        val businessText = binding.businessCB.text.toString()
-
-        binding.businessCB.setOnClickListener {
-            if (binding.businessCB.isChecked) {
-                binding.textView3.text = businessText
-            } else {
-                binding.textView3.text = null
-            }
-        }
-    }
-
-    private fun entrepreneursClick() {
-        val entrepreneursText = binding.entrepreneursCB.text.toString()
-
-        binding.entrepreneursCB.setOnClickListener {
-            if (binding.entrepreneursCB.isChecked) {
-                binding.textView3.text = entrepreneursText
-            } else {
-                binding.textView3.text = null
-            }
-        }
-    }
-
-    private fun politicsClick() {
-        val politicsText = binding.politicsCB.text.toString()
-
-        binding.politicsCB.setOnClickListener {
-            if (binding.politicsCB.isChecked) {
-                binding.textView3.text = politicsText
-            } else {
-                binding.textView3.text = null
-            }
-        }
-    }
-
-    private fun sportsClick() {
-        val sportsText = binding.sportsCB.text.toString()
-
-        binding.sportsCB.setOnClickListener {
-            if (binding.sportsCB.isChecked) {
-                binding.textView3.text = sportsText
-            } else {
-                binding.textView3.text = null
-            }
-        }
-    }
-
-    private fun travelClick() {
-        val travelText = binding.travelCB.text.toString()
-
-        binding.travelCB.setOnClickListener {
-            if (binding.travelCB.isChecked) {
-                binding.textView3.text = travelText
-            } else {
-                binding.textView3.text = null
-            }
-        }
     }
 }
