@@ -47,9 +47,6 @@ class SearchActivity : AppCompatActivity() {
             val travel = if(binding.travelCB.isChecked) "travel" else ""
 
             val searchQuery = binding.textInputSearchQuery.text.toString()
-            val dateStart = binding.datePickerStart.text.toString()
-            val dateEnd = binding.datePickerEnd.text.toString()
-
             Intent(baseContext, SearchedArticlesResultActivity::class.java).also{
 
                 // NEWS DESK VALUES
@@ -64,8 +61,8 @@ class SearchActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_QUERY", searchQuery)
 
                 // Date values
-                it.putExtra("EXTRA_DATE_START", dateStart)
-                it.putExtra("EXTRA_DATE_END", dateEnd)
+                it.putExtra("EXTRA_DATE_START", startDateConvertedString)
+                it.putExtra("EXTRA_DATE_END", endDateConvertedString)
 
                 startActivity(it)
 
