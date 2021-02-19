@@ -48,9 +48,16 @@ class MostPopularAdapter : RecyclerView.Adapter<MostPopularAdapter.MostPopularVi
 
     override fun onBindViewHolder(holder: MostPopularViewHolder, position: Int) {
         val mostPopularArticle = mostPopularArticles[position]
+        val photoUrl =
+            if (mostPopularArticle.media.isNotEmpty()) {
+                if (mostPopularArticle.media[0].mostPopularMetaData.isNotEmpty())
+                    mostPopularArticle.media[0].mostPopularMetaData[0].url
+                else ""
+            } else ""
 
         holder.binding.apply {
-            Glide.with(cardView.context).load(mostPopularArticle.media[0].mostPopularMetaData[1].url).into(ivThumbnail)
+
+            Glide.with(imageViewCardView.context).load(photoUrl).into(ivThumbnail)
             tvTitle.text = mostPopularArticle.title
             tvRegion.text = mostPopularArticle.section
             tvDate.text = mostPopularArticle.published_date

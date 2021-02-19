@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyNewsRecyclerView">
-        <activity android:name=".ui.activities.SearchedArticlesResultsActivity"
+        <activity android:name=".ui.activities.SearchedArticlesResultActivity"
             android:parentActivityName=".ui.activities.SearchActivity"
             android:label="Your Articles"/>
         <activity

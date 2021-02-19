@@ -46,8 +46,13 @@ class TopStoriesAdapter : RecyclerView.Adapter<TopStoriesAdapter.ArticleViewHold
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = articles[position]
 
+        val photoUrl =
+            if (article.multimedia[1].url.isNotEmpty())
+                article.multimedia[1].url
+        else ""
+
         holder.binding.apply {
-            Glide.with(cardView.context).load(article.multimedia[2].url).into(ivThumbnail)
+            Glide.with(imageViewCardView.context).load(photoUrl).into(ivThumbnail)
             tvTitle.text = article.title
             tvRegion.text = article.section
             tvDate.text = article.published_date

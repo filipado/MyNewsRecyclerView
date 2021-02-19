@@ -46,8 +46,12 @@ class MovieReviewsAdapter : RecyclerView.Adapter<MovieReviewsAdapter.MovieReview
     override fun onBindViewHolder(holderMovie: MovieReviewsViewHolder, position: Int) {
         val movieReview = movieReviews[position]
 
+        val photoUrl = if (movieReview.multimedia.src.isNotEmpty())
+            movieReview.multimedia.src
+        else ""
+
         holderMovie.binding.apply {
-            Glide.with(cardView.context).load(movieReview.multimedia.src).into(ivThumbnail)
+            Glide.with(imageViewCardView.context).load(photoUrl).into(ivThumbnail)
             tvTitle.text = movieReview.summary_short
             tvRegion.text = movieReview.byline
             tvDate.text = movieReview.opening_date

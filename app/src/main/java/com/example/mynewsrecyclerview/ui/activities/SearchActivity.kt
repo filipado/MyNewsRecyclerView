@@ -1,11 +1,9 @@
 package com.example.mynewsrecyclerview.ui.activities
 
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.mynewsrecyclerview.databinding.ActivitySearchBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,7 +38,7 @@ class SearchActivity : AppCompatActivity() {
 
         // Search Button INTENT click takes us to show Search results
         binding.button.setOnClickListener{
-            val searchArticlesResultActivity = Intent(baseContext, SearchedArticlesResultsActivity::class.java)
+            val searchArticlesResultActivity = Intent(baseContext, SearchedArticlesResultActivity::class.java)
             startActivity(searchArticlesResultActivity)
         }
 
