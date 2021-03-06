@@ -1,102 +1,113 @@
 package com.example.mynewsrecyclerview.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import com.example.mynewsrecyclerview.R
-import com.example.mynewsrecyclerview.databinding.ActivityMainBinding
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mynewsrecyclerview.databinding.ActivityNotificationsBinding
+import com.example.mynewsrecyclerview.ui.notification.AlarmReceiver
+import java.util.*
 
 class NotificationsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNotificationsBinding
+
+    private lateinit var alarmManager: AlarmManager
+    private lateinit var alarmIntent: PendingIntent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNotificationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // NOTIFICATION POP UP TIME SET UP TP 5PM:
 
-        artsClick()
-        businessClick()
-        entrepreneursClick()
-        politicsClick()
-        sportsClick()
-        travelClick()
+        val alarmStartTime = Calendar.getInstance()!!
+        alarmStartTime.set(Calendar.HOUR_OF_DAY, 17)
+        alarmStartTime.set(Calendar.MINUTE, 0)
+        alarmStartTime.set(Calendar.SECOND, 0)
+
+        // INITIATING ALARM MANAGER
+
+        alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            0,
+            Intent(applicationContext, AlarmReceiver::class.java),
+            0
+        )
+
+        // SWITCHING NOTIFICATIONS ON AND OFF
+
+        binding.switchNotifications.setOnCheckedChangeListener { _, isChecked ->
+
+            when {
+                isChecked -> {
+
+                    Toast.makeText(
+                        applicationContext,
+                        "I'll get the articles you need and I will see you at 5PM.",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    alarmManager.setRepeating(
+                        AlarmManager.RTC_WAKEUP,
+                        alarmStartTime.timeInMillis,
+                        AlarmManager.INTERVAL_DAY,
+                        alarmIntent
+                    )
+
+                    // CREATING VALUES TO BE STORED IN SHARED PREFERENCES
+
+                    val searchQuery = binding.editTextQueryNotifications.text.toString()
+
+                    val arts = if (binding.artsCB.isChecked) "arts" else ""
+                    val business = if (binding.businessCB.isChecked) "business" else ""
+                    val entrepreneurs = if (binding.entrepreneursCB.isChecked) "entrepreneurs" else ""
+                    val politics = if (binding.politicsCB.isChecked) "politics" else ""
+                    val sports = if (binding.sportsCB.isChecked) "sports" else ""
+                    val travel = if (binding.travelCB.isChecked) "travel" else ""
+
+                    val sharedPref = getSharedPreferences("NotificationsActivity", android.content.Context.MODE_PRIVATE)
+                    val editor = sharedPref.edit()
+                    editor.putString("arts", arts)
+                    editor.putString("business", business)
+                    editor.putString("entrepreneurs", entrepreneurs)
+                    editor.putString("politics", politics)
+                    editor.putString("sports", sports)
+                    editor.putString("travel", travel)
+                    editor.putString("searchQuery", searchQuery)
+                    editor.apply()
+                }
+            }
+
+            when {
+                !isChecked -> {
+                    alarmManager.setRepeating(
+                        AlarmManager.RTC_WAKEUP,
+                        alarmStartTime.timeInMillis,
+                        AlarmManager.INTERVAL_DAY,
+                        alarmIntent
+                    )
+
+                    alarmManager.cancel(alarmIntent)
 
 
+                    Toast.makeText(
+                        applicationContext,
+                        "Notifications cancelled.",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-
-    }
-
-    private fun artsClick() {
-        val artsText = binding.artsCB.text.toString()
-
-        binding.artsCB.setOnClickListener {
-            if (binding.artsCB.isChecked) {
-                binding.textView2.text = artsText
-            } else {
-                binding.textView2.text = null
+                }
             }
         }
+
+
     }
 
-    private fun businessClick() {
-        val businessText = binding.businessCB.text.toString()
 
-        binding.businessCB.setOnClickListener {
-            if (binding.businessCB.isChecked) {
-                binding.textView2.text = businessText
-            } else {
-                binding.textView2.text = null
-            }
-        }
-    }
-
-    private fun entrepreneursClick() {
-        val entrepreneursText = binding.entrepreneursCB.text.toString()
-
-        binding.entrepreneursCB.setOnClickListener {
-            if (binding.entrepreneursCB.isChecked) {
-                binding.textView2.text = entrepreneursText
-            } else {
-                binding.textView2.text = null
-            }
-        }
-    }
-
-    private fun politicsClick() {
-        val politicsText = binding.politicsCB.text.toString()
-
-        binding.politicsCB.setOnClickListener {
-            if (binding.politicsCB.isChecked) {
-                binding.textView2.text = politicsText
-            } else {
-                binding.textView2.text = null
-            }
-        }
-    }
-
-    private fun sportsClick() {
-        val sportsText = binding.sportsCB.text.toString()
-
-        binding.sportsCB.setOnClickListener {
-            if (binding.sportsCB.isChecked) {
-                binding.textView2.text = sportsText
-            } else {
-                binding.textView2.text = null
-            }
-        }
-    }
-
-    private fun travelClick() {
-        val travelText = binding.travelCB.text.toString()
-
-        binding.travelCB.setOnClickListener {
-            if (binding.travelCB.isChecked) {
-                binding.textView2.text = travelText
-            } else {
-                binding.textView2.text = null
-            }
-        }
-    }
 }

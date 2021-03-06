@@ -44,16 +44,12 @@ class SearchedArticlesResultActivity : AppCompatActivity() {
 
             binding.pbSearchResults.isVisible = true
 
-
-            // 2020 year, then 13 day, then 02 month
-
             val response = try {
-                val searchedArticles = ApiClient.retrofit.getSearchedArticles(searchQuery,
+                ApiClient.retrofit.getSearchedArticles(searchQuery,
                     startDate,
-                    endDate,
-                    "$arts $business $entrepreneurs" +
-                            "$politics $sports $travel")
-                searchedArticles
+                    endDate, "$arts $business $entrepreneurs" +
+                        "$politics $sports $travel")
+
             } catch (e: IOException) {
                 Log.e(TopStoriesFragment.TAG, "IOException, you might not have internet connection")
                 binding.pbSearchResults.isVisible = false

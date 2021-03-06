@@ -6,19 +6,17 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.mynewsrecyclerview.R
 import com.example.mynewsrecyclerview.api.response.SearchedArticle
 import com.example.mynewsrecyclerview.databinding.ArticleRowBinding
 
-class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
+class NotificationsAdapter : RecyclerView.Adapter<NotificationsAdapter.MyViewHolder>() {
 
-    inner class SearchResultsViewHolder(val binding: ArticleRowBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    // MY VIEW HOLDER CLASS
+    inner class MyViewHolder(val binding: ArticleRowBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val diffCallBack = object : DiffUtil.ItemCallback<SearchedArticle>() {
-        override fun areItemsTheSame(
-            oldItem: SearchedArticle,
-            newItem: SearchedArticle
-        ): Boolean {
+        override fun areItemsTheSame(oldItem: SearchedArticle, newItem: SearchedArticle): Boolean {
             return oldItem.url == newItem.url
         }
 
@@ -37,10 +35,9 @@ class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.SearchRes
             differ.submitList(value)
         }
 
-    override fun getItemCount() = searchResults.size
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultsViewHolder {
-        return SearchResultsViewHolder(
+    // 1st ADAPTER METHOD TO OVERRIDE
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        return MyViewHolder(
             ArticleRowBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -49,7 +46,9 @@ class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.SearchRes
         )
     }
 
-    override fun onBindViewHolder(holder: SearchResultsViewHolder, position: Int) {
+    // 2nd ADAPTER METHOD TO OVERRIDE
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+
         val searchResult = searchResults[position]
 
         val photoUrl =
@@ -64,4 +63,8 @@ class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.SearchRes
             tvDate.text = searchResult.published_date
         }
     }
+
+    // 3rd ADAPTER METHOD TO OVERRIDE
+    override fun getItemCount() = searchResults.size
+
 }

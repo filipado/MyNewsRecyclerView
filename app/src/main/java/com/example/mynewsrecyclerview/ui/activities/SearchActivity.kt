@@ -47,6 +47,7 @@ class SearchActivity : AppCompatActivity() {
             val travel = if(binding.travelCB.isChecked) "travel" else ""
 
             val searchQuery = binding.textInputSearchQuery.text.toString()
+
             Intent(baseContext, SearchedArticlesResultActivity::class.java).also{
 
                 // NEWS DESK VALUES
