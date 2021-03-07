@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: unit-tests-results
-          path: app/build/reports/tests/testDebudUnitTest/index.html
+          path: app/build/reports/tests/testDebugUnitTest/index.html
 
       - name: Build Project
         run: ./gradlew assemble
