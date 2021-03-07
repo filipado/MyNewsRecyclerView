@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // space added, just testing GitHub Actions
+
         supportActionBar?.hide()
 
         val fragments: ArrayList<Fragment> = arrayListOf(TopStoriesFragment(), MostPopularFragment(), MovieReviewsFragment())
