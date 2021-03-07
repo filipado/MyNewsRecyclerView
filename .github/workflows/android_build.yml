@@ -5,7 +5,7 @@ on: pull_request
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
       - uses: actions/checkout@v1
@@ -23,6 +23,12 @@ jobs:
 
       - name: Run Unit Tests
         run: ./gradlew testDebugUnitTest
+
+      - name: Unit Tests Results
+        uses: actions/upload-artifact@v1
+        with:
+          name: unit-tests-results
+          path: app/build/reports/tests/testDebudUnitTest/index.html
 
       - name: Build Project
         run: ./gradlew assemble
