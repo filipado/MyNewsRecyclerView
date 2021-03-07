@@ -25,7 +25,7 @@ class NotificationsActivity : AppCompatActivity() {
 
         // NOTIFICATION POP UP TIME SET UP TP 5PM:
 
-        val alarmStartTime = Calendar.getInstance()!!
+        val alarmStartTime = Calendar.getInstance()
         alarmStartTime.set(Calendar.HOUR_OF_DAY, 17)
         alarmStartTime.set(Calendar.MINUTE, 0)
         alarmStartTime.set(Calendar.SECOND, 0)
