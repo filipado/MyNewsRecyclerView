@@ -3,13 +3,14 @@ package com.example.mynewsrecyclerview.api.response
 import org.junit.Assert
 import org.junit.Test
 
-val movieResults = ArrayList<Result>()
 
 
 class MovieReviewsResponseTest {
 
     @Test
     fun `validate MovieReviewsResponse`() {
+        val movieResults = ArrayList<Result>()
+
         val response = MovieReviewsResponse(movieResults)
 
         Assert.assertEquals(response.results, movieResults)

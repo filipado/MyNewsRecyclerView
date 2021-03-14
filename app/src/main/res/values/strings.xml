@@ -2,4 +2,19 @@
     <string name="app_name">My News</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Most Popular Fragment</string>
+    <string name="what_are_you_searching_for">What are you searching for?</string>
+    <string name="end_date_mm_dd_yyyy">End date: mm-dd-yyyy</string>
+
+    <string name="start_date_mm_dd_yyy">Start date: mm-dd-yyy</string>
+    <string name="this_is_a_thumbnail_related_to_the_article_you_can_view_by_clicking_on_it">This is a thumbnail related to the article you can view by clicking on it</string>
+    <string name="search">Search</string>
+    <string name="notifications">Notifications</string>
+    <string name="search_query_term">Search query term</string>
+    <string name="arts">Arts</string>
+    <string name="business">Business</string>
+    <string name="entrepreneurs">Entrepreneurs</string>
+    <string name="politics">Politics</string>
+    <string name="sports">Sports</string>
+    <string name="travel">Travel</string>
+    <string name="enable_notifications_once_per_day">Enable notifications (once per day)</string>
 </resources>

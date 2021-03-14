@@ -6,11 +6,10 @@ import org.junit.Test
 
 class TopStoryResponseTest {
 
-    private val topStoryList = ArrayList<TopStory>()
-    private val multimediaList = ArrayList<Multimedia>()
 
     @Test
     fun `validate TopStoryResponse`() {
+        val topStoryList = ArrayList<TopStory>()
 
         val storyResponse = TopStoryResponse(topStoryList)
 
@@ -19,6 +18,8 @@ class TopStoryResponseTest {
 
     @Test
     fun `validate TopStory`() {
+        val multimediaList = ArrayList<Multimedia>()
+
 
         val topStory = TopStory(
             "2021-03-01",
