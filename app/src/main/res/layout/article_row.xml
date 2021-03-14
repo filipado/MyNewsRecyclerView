@@ -38,7 +38,8 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
 
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars"
+                android:contentDescription="@string/this_is_a_thumbnail_related_to_the_article_you_can_view_by_clicking_on_it" />
 
         </androidx.cardview.widget.CardView>
 
