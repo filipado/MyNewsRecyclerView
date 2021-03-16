@@ -1,4 +1,4 @@
-package com.example.mynewsrecyclerview.ui
+package com.example.mynewsrecyclerview.ui.espresso
 
 
 import android.view.View
@@ -9,11 +9,11 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
 import com.example.mynewsrecyclerview.R
-import com.example.mynewsrecyclerview.ui.activities.NotificationsActivity
+import com.example.mynewsrecyclerview.ui.activities.SearchActivity
 import org.hamcrest.Description
 import org.hamcrest.Matcher
+import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
@@ -22,18 +22,18 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4ClassRunner::class)
-class NotificationsActivityUITest {
+class SearchActivityUITest {
 
     @Rule
     @JvmField
-    var mActivityTestRule = ActivityTestRule(NotificationsActivity::class.java)
+    var mActivityTestRule = ActivityTestRule(SearchActivity::class.java)
 
     @Test
-    fun notificationsActivityUITest() {
+    fun searchActivityUITest() {
 
         val textInputEditText = onView(
             allOf(
-                withId(R.id.editTextQueryNotifications),
+                withId(R.id.textInputSearchQuery),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.searchQueryTextFieldLayout),
@@ -46,6 +46,64 @@ class NotificationsActivityUITest {
         )
         textInputEditText.perform(replaceText("obama"), closeSoftKeyboard())
 
+        val textInputEditText2 = onView(
+            allOf(
+                withId(R.id.datePickerStart),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.datePickerStartLayout),
+                        0
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
+        textInputEditText2.perform(click())
+
+        val materialButton = onView(
+            allOf(
+                withId(android.R.id.button1), withText("OK"),
+                childAtPosition(
+                    childAtPosition(
+                        withClassName(`is`("android.widget.ScrollView")),
+                        0
+                    ),
+                    3
+                )
+            )
+        )
+        materialButton.perform(scrollTo(), click())
+
+        val textInputEditText3 = onView(
+            allOf(
+                withId(R.id.datePickerEnd),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.datePickerEndLayout),
+                        0
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
+        textInputEditText3.perform(click())
+
+        val materialButton2 = onView(
+            allOf(
+                withId(android.R.id.button1), withText("OK"),
+                childAtPosition(
+                    childAtPosition(
+                        withClassName(`is`("android.widget.ScrollView")),
+                        0
+                    ),
+                    3
+                )
+            )
+        )
+        materialButton2.perform(scrollTo(), click())
+
         val materialCheckBox = onView(
             allOf(
                 withId(R.id.artsCB), withText("Arts"),
@@ -54,7 +112,7 @@ class NotificationsActivityUITest {
                         withId(android.R.id.content),
                         0
                     ),
-                    2
+                    4
                 ),
                 isDisplayed()
             )
@@ -69,7 +127,7 @@ class NotificationsActivityUITest {
                         withId(android.R.id.content),
                         0
                     ),
-                    5
+                    7
                 ),
                 isDisplayed()
             )
@@ -84,7 +142,7 @@ class NotificationsActivityUITest {
                         withId(android.R.id.content),
                         0
                     ),
-                    3
+                    5
                 ),
                 isDisplayed()
             )
@@ -99,7 +157,7 @@ class NotificationsActivityUITest {
                         withId(android.R.id.content),
                         0
                     ),
-                    6
+                    8
                 ),
                 isDisplayed()
             )
@@ -114,7 +172,7 @@ class NotificationsActivityUITest {
                         withId(android.R.id.content),
                         0
                     ),
-                    4
+                    6
                 ),
                 isDisplayed()
             )
@@ -129,75 +187,27 @@ class NotificationsActivityUITest {
                         withId(android.R.id.content),
                         0
                     ),
-                    7
+                    9
                 ),
                 isDisplayed()
             )
         )
         materialCheckBox6.perform(click())
 
-        val switch_ = onView(
+        val materialButton3 = onView(
             allOf(
-                withId(R.id.switchNotifications),
+                withId(R.id.buttonSearch), withText("Search"),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
                         0
                     ),
-                    9
+                    10
                 ),
                 isDisplayed()
             )
         )
-        switch_.perform(click())
-
-        val switch_2 = onView(
-            allOf(
-                withId(R.id.switchNotifications),
-                childAtPosition(
-                    childAtPosition(
-                        withId(android.R.id.content),
-                        0
-                    ),
-                    9
-                ),
-                isDisplayed()
-            )
-        )
-        switch_2.perform(click())
-
-        val switch_3 = onView(
-            allOf(
-                withId(R.id.switchNotifications),
-                childAtPosition(
-                    childAtPosition(
-                        withId(android.R.id.content),
-                        0
-                    ),
-                    9
-                ),
-                isDisplayed()
-            )
-        )
-        switch_3.perform(click())
-
-        val appCompatImageButton = onView(
-            allOf(
-                withContentDescription("Navigate up"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.action_bar),
-                        childAtPosition(
-                            withId(R.id.action_bar_container),
-                            0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatImageButton.perform(click())
+        materialButton3.perform(click())
     }
 
     private fun childAtPosition(

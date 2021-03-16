@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.SearchActivity">
+    tools:context=".ui.activities.SearchActivity"
+    android:id="@+id/searchActivityLayout">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchQueryTextFieldLayout"
@@ -134,7 +135,7 @@
         app:layout_constraintTop_toBottomOf="@+id/sportsCB" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

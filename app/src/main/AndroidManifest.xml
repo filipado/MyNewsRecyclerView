@@ -11,8 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyNewsRecyclerView">
-        <activity android:name=".ui.activities.NotificationResult"
-            android:label="Notification Articles"/>
+        <activity
+            android:name=".ui.activities.WebViewActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".ui.activities.NotificationResult"
+            android:label="Notification Articles" />
         <activity
             android:name=".ui.activities.SearchedArticlesResultActivity"
             android:label="Your Articles"
@@ -31,6 +38,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <receiver android:name=".ui.notification.AlarmReceiver" />

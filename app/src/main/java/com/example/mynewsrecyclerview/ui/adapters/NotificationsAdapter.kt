@@ -1,7 +1,10 @@
 package com.example.mynewsrecyclerview.ui.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.webkit.WebView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -61,6 +64,14 @@ class NotificationsAdapter : RecyclerView.Adapter<NotificationsAdapter.MyViewHol
             tvTitle.text = searchResult.abstract
             tvRegion.text = searchResult.subsection
             tvDate.text = searchResult.published_date
+        }
+
+        holder.itemView.setOnClickListener{
+
+            Intent(it.context, WebView::class.java).apply {
+                this.putExtra("URL", searchResult.url)
+                startActivity(it.context, this, null)
+            }
         }
     }
 

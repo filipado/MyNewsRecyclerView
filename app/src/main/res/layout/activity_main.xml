@@ -20,8 +20,7 @@
             android:layout_height="wrap_content"
             app:menu="@menu/top_app_bar"
             app:navigationIcon="@drawable/ic_baseline_menu_24"
-            app:title="@string/app_name" />
-
+            app:title="@string/app_name"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"

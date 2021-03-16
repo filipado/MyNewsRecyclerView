@@ -1,6 +1,5 @@
 package com.example.mynewsrecyclerview.ui.adapters
 
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -9,11 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mynewsrecyclerview.databinding.ArticleRowBinding
 import com.example.mynewsrecyclerview.api.response.TopStory
-import com.example.mynewsrecyclerview.ui.fragments.TopStoriesFragment
+import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
+import com.example.mynewsrecyclerview.ui.activities.WebViewActivity
+
 
 class TopStoriesAdapter : RecyclerView.Adapter<TopStoriesAdapter.ArticleViewHolder>() {
 
-    inner class ArticleViewHolder(val binding: ArticleRowBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ArticleViewHolder(val binding: ArticleRowBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     private val diffCallback = object : DiffUtil.ItemCallback<TopStory>() {
         override fun areItemsTheSame(oldItem: TopStory, newItem: TopStory): Boolean {
@@ -40,7 +43,8 @@ class TopStoriesAdapter : RecyclerView.Adapter<TopStoriesAdapter.ArticleViewHold
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-        ))
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
@@ -49,14 +53,25 @@ class TopStoriesAdapter : RecyclerView.Adapter<TopStoriesAdapter.ArticleViewHold
         val photoUrl =
             if (article.multimedia[1].url.isNotEmpty())
                 article.multimedia[1].url
-        else ""
+            else ""
+
+        val sectionString = article.section
 
         holder.binding.apply {
             Glide.with(imageViewCardView.context).load(photoUrl).into(ivThumbnail)
             tvTitle.text = article.title
-            tvRegion.text = article.section
-            tvDate.text = article.published_date
+            tvRegion.text = (sectionString[0].toUpperCase() + sectionString.substring(1))
+            tvDate.text = article.published_date.split("T").first()
         }
+
+        holder.itemView.setOnClickListener {
+
+            Intent(it.context, WebViewActivity::class.java).apply {
+                this.putExtra("URL", article.url)
+                startActivity(it.context, this, null)
+            }
+        }
+
     }
 
 }
