@@ -36,7 +36,7 @@ class SearchActivity : AppCompatActivity() {
         }
 
         // Search Button INTENT click takes us to show Search results
-        binding.button.setOnClickListener{
+        binding.buttonSearch.setOnClickListener{
 
             // All values to be exported to search activity using Intent
             val arts = if(binding.artsCB.isChecked) "arts" else ""

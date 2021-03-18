@@ -49,7 +49,7 @@ class NotificationsActivity : AppCompatActivity() {
 
                     Toast.makeText(
                         applicationContext,
-                        "I'll get the articles you need and I will see you at 5PM.",
+                        "I'll get the articles you need soon.",
                         Toast.LENGTH_LONG
                     ).show()
 

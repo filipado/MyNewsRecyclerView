@@ -1,4 +1,4 @@
-package com.example.mynewsrecyclerview.ui
+package com.example.mynewsrecyclerview.ui.espresso
 
 
 import android.view.View
@@ -7,8 +7,8 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
 import com.example.mynewsrecyclerview.R
 import com.example.mynewsrecyclerview.ui.activities.SearchActivity
 import org.hamcrest.Description
@@ -21,7 +21,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @LargeTest
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class SearchActivityUITest {
 
     @Rule
@@ -196,7 +196,7 @@ class SearchActivityUITest {
 
         val materialButton3 = onView(
             allOf(
-                withId(R.id.button), withText("Search"),
+                withId(R.id.buttonSearch), withText("Search"),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),

@@ -1,4 +1,4 @@
-package com.example.mynewsrecyclerview.ui
+package com.example.mynewsrecyclerview.ui.espresso
 
 
 import android.view.View
@@ -7,9 +7,10 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
 import com.example.mynewsrecyclerview.R
+import com.example.mynewsrecyclerview.ui.MainActivity
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
@@ -19,7 +20,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @LargeTest
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class MainActivityUITest {
 
     @Rule
@@ -121,20 +122,6 @@ class MainActivityUITest {
         )
         overflowMenuButton.perform(click())
 
-        val materialTextView = onView(
-            allOf(
-                withId(R.id.title), withText("Notifications"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.content),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        materialTextView.perform(click())
     }
 
     private fun childAtPosition(

@@ -1,13 +1,17 @@
 package com.example.mynewsrecyclerview.ui.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.webkit.WebView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mynewsrecyclerview.api.response.SearchedArticle
 import com.example.mynewsrecyclerview.databinding.ArticleRowBinding
+import com.example.mynewsrecyclerview.ui.activities.WebViewActivity
 
 class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
 
@@ -61,7 +65,15 @@ class SearchResultsAdapter : RecyclerView.Adapter<SearchResultsAdapter.SearchRes
             Glide.with(imageViewCardView.context).load(photoUrl).into(ivThumbnail)
             tvTitle.text = searchResult.abstract
             tvRegion.text = searchResult.subsection
-            tvDate.text = searchResult.published_date
+            tvDate.text = searchResult.published_date.split("T").first()
+        }
+
+        holder.itemView.setOnClickListener{
+
+            Intent(it.context, WebViewActivity::class.java).apply {
+                this.putExtra("URL", searchResult.url)
+                startActivity(it.context, this, null)
+            }
         }
     }
 }

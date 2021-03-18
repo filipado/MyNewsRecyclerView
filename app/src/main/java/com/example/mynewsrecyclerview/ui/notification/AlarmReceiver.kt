@@ -9,9 +9,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.example.mynewsrecyclerview.R
 import com.example.mynewsrecyclerview.ui.activities.NotificationResult
-import com.example.mynewsrecyclerview.ui.activities.SearchActivity
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.coroutineContext
 
 class AlarmReceiver : BroadcastReceiver() {
 

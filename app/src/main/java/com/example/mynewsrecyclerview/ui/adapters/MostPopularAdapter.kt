@@ -1,13 +1,16 @@
 package com.example.mynewsrecyclerview.ui.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mynewsrecyclerview.api.response.MostPopularArticle
 import com.example.mynewsrecyclerview.databinding.ArticleRowBinding
+import com.example.mynewsrecyclerview.ui.activities.WebViewActivity
 
 class MostPopularAdapter : RecyclerView.Adapter<MostPopularAdapter.MostPopularViewHolder>() {
 
@@ -61,6 +64,13 @@ class MostPopularAdapter : RecyclerView.Adapter<MostPopularAdapter.MostPopularVi
             tvTitle.text = mostPopularArticle.title
             tvRegion.text = mostPopularArticle.section
             tvDate.text = mostPopularArticle.published_date
+        }
+
+        holder.itemView.setOnClickListener{
+            Intent(it.context, WebViewActivity::class.java).apply {
+                this.putExtra("URL", mostPopularArticle.url)
+                startActivity(it.context, this, null)
+            }
         }
     }
 

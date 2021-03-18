@@ -45,7 +45,7 @@ class NotificationResult : AppCompatActivity() {
 
         // SETTING UP DATE SCOPE FOR NOTIFICATIONS -> BETWEEN YESTERDAY AND TODAY INCLUSIVE OF TODAY
 
-        val yesterday = LocalDate.now().minusDays(1).toString()
+        val yesterday = LocalDate.now().minusDays(3).toString()
         val today = LocalDate.now().toString()
 
         val myFormat = org.threeten.bp.format.DateTimeFormatter.ofPattern("yyyyMMdd")

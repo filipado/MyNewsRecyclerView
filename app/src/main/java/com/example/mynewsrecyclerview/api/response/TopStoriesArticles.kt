@@ -19,4 +19,5 @@ data class Multimedia (
 
     // Movie Reviews Response:
     val src: String
+
 )
